@@ -1,65 +1,8 @@
----
-title: <center>"A linear regression package in R based on RCourseLab4" </center>
-author: "Farhana chowdhury Tondra,Syeda Farha Shazmeen"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEngine{knitr::render(..., 'all')}
-  %\VignetteIndexEntry{A linear regression package in R based on RCourseLab4}
-  %\VignetteEngine{knitr::knitr}
-  %\VignetteEncoding{UTF-8}{inputenc}
----
-
-**RCourseLab4** is entitled for the students who have completed lab3. This is an advanced assigment of R. This package contains several methods of linear regression model including **vignette** manual.We are using linear algebra to create the most basic functionality in the R package. It has a R script based on RC class  where we first defined the fields and then methods. The methods which implemented for calculating linear regression model is defined later.This package contains few things :
-
-- A Method RC class is used here named as linreg(). 
-- About six methods implemented for linear regression model.
-- Used Roxygen skeleton and vignette for documentation.
-
-## linreg() Class:
-
-The function we created here is called **linreg()** and have the two arguments formula and data. The function returns an object with of class linreg. The class is implemented as Referrence class using **setRefClass()**. Outside the class we created object **linreg_mod** for returning the results. This class accepts several arguments as lists in **fields** and **methods** classes. In fields class we defined the necessary parameters we need for our class and their type. Where in methods class we defined our required calculations.
-
-## Calculations using ordinary least squares: 
-
-### Regressions coefficients:  
-Regressions coefficient using linear algebra
-$$\hat{\beta} = (\mathbf{X}^\top \mathbf{X})^{-1}(\mathbf{X}^\top \mathbf{y})$$
-
-### The fitted values:
-Fitted values using linear algebra    
-              $$ \hat{y}= X\hat{\beta} $$
-              
-### The residuals:
-Residuals using linear algebra 
-        $$\hat{e}= y - \hat{y} = X\hat{\beta} $$
-
-### The degrees of freedom:
-The degrees of freedom using linear algebra 
-        $$ df = n - p $$
-        where n is the number of observations and p is the number of parameters in the model
-
-### The residual variance:
-The residual variance: using linear algebra 
-        $$ \hat{\sigma}^2 = \frac{\mathbf{e}^\top \mathbf{e}}{df}$$
-   
-### The variance of the regression coefficients:        
-The variance of the regression coefficients
-  $$ \hat{Var}(\hat{\beta}) = \hat{\sigma}^2({\mathbf{X}^\top \mathbf{X}})^{-1} $$
-
-###The t-values for each coefficient:
-The t-values for each coefficient
-        $$ t_\beta= \frac{\hat{\beta}}{\sqrt{{Var}(\hat{\beta})}} $$
-
-## Methods:
-###linreg_mod$print()
-It prints out the coefficients and coefficient names.
-```{r, echo=TRUE}
-knitr::opts_chunk$set(error = TRUE)
+## ---- echo=TRUE----------------------------------------------------------
+knitr::opts_chunk$set(error = FALSE)
 
 print = function() {
-    
+     
                       cat("\n","Call:","\n",
                           paste("linreg(", "formula = ", formula[2]," ", formula[1], " ", 
                                 formula[3],", ", "data = ", parsedata, ")",sep = "", 
@@ -67,15 +10,11 @@ print = function() {
                           paste(row.names(beta), sep = "  ", collapse ="  " ),"\n",
                           format(round(beta,2), justify = "centre",width = 10))
                     }
-linreg_mod <- linreg$new(Petal.Length~Sepal.Width+Sepal.Length,data=iris)
+linreg_mod <- RCourseLab4:::linreg$new(Petal.Length~Sepal.Width+Sepal.Length,data=iris)
 linreg_mod$print()
 
-```
 
-
-###linreg_mod$plot()
-## Figures of two plot are shown below.
-```{r fig.width=7, fig.height=4, echo=FALSE}
+## ----fig.width=7, fig.height=4, echo=FALSE-------------------------------
 plot=function() {
               
               library(ggplot2)
@@ -126,53 +65,38 @@ plot=function() {
             
           }        
 
-linreg_mod <- linreg$new(Petal.Length~Sepal.Width+Sepal.Length,data=iris)
+linreg_mod <- RCourseLab4:::linreg$new(Petal.Length~Sepal.Width+Sepal.Length,data=iris)
 linreg_mod$plot()
-```
 
-###linreg_mod$resid()
-resid() returns the vector of residuals of e.
-```{r, echo=TRUE}
+## ---- echo=TRUE----------------------------------------------------------
 knitr::opts_chunk$set(error = TRUE)
 resid = function(){
                      cat("Vector of Residuals:","\n")
                      return(as.vector(round(ebar, 2)))
            }
-linreg_mod <- linreg$new(Petal.Length~Sepal.Width+Sepal.Length,data=iris)
+linreg_mod <- RCourseLab4:::linreg$new(Petal.Length~Sepal.Width+Sepal.Length,data=iris)
 linreg_mod$resid()
 
-```
 
-
-###linreg_mod$pred()
-pred() returns the predicted values of ybar.
-```{r, echo=TRUE}
+## ---- echo=TRUE----------------------------------------------------------
 knitr::opts_chunk$set(error = TRUE)
 pred =function(){
                      cat("Predicted values or fitted values:","\n")
                      return(as.vector(round(ybar, 2)))
           }
-linreg_mod <- linreg$new(Petal.Length~Sepal.Width+Sepal.Length,data=iris)
+linreg_mod <- RCourseLab4:::linreg$new(Petal.Length~Sepal.Width+Sepal.Length,data=iris)
 linreg_mod$pred()
-```
 
-###linreg_mod$coef()
-coef() returns the coefficients as a named vector
-
-```{r, echo=TRUE}
+## ---- echo=TRUE----------------------------------------------------------
 knitr::opts_chunk$set(error = TRUE)
 coef = function() {
                      cat("Regressions coefficients:","\n\n")
                      return(as.vector(round(beta,2)))
           }
-linreg_mod <- linreg$new(Petal.Length~Sepal.Width+Sepal.Length,data=iris)
+linreg_mod <- RCourseLab4:::linreg$new(Petal.Length~Sepal.Width+Sepal.Length,data=iris)
 linreg_mod$coef()
-```
 
-###linreg_mod$summary()
-summary() computes and returns a list of summary statistics of the fitted linear model given in object, using the components (list elements).
-
-```{r, echo=FALSE}
+## ---- echo=FALSE---------------------------------------------------------
 knitr::opts_chunk$set(error = TRUE)
 summary = function() {
                      output <- data.frame( rname = rownames(beta),
@@ -216,28 +140,9 @@ summary = function() {
         
                        }
 
-linreg_mod <- linreg$new(Petal.Length~Sepal.Width+Sepal.Length,data=iris)
+linreg_mod <- RCourseLab4:::linreg$new(Petal.Length~Sepal.Width+Sepal.Length,data=iris)
 linreg_mod$summary()
-```
 
-
-##Roxygen Description files:
-###Package documentation : **RCourseLab4.Rd**
-This file includes the detail description of how package works , who worked for it and so on.
-
-###Function documentation : **linreg-class.Rd**
-This file contains the description of class file , fields, method, examples, references and return statements.
-
-###Vignettes documentation : **lab4.Rmd**
-This is about how the whole package is made of and how to read it and implement it.
- 
-##Install **RCourseLab4** package for future reference:
-devtools::install_github("farhashazmeen/lab4")
-```{r,eval = FALSE}
-devtools::install_github("farhashazmeen/lab4")
-```
-
-## Limitations:
-Unable to add geographical theme on ggplot and estimation of QR decomposition.
-
+## ----eval = FALSE--------------------------------------------------------
+#  devtools::install_github("farhashazmeen/lab4")
 
