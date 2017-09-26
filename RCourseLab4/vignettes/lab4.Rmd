@@ -4,10 +4,10 @@ author: "Farhana chowdhury Tondra,Syeda Farha Shazmeen"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{A linear regression package in R based on RCourseLab4}
-  %\VignetteEngine{knitr::render}
-  %\VignetteEngine{knitr::knitr}
   %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::render(..., 'all')}
+  %\VignetteIndexEntry{A linear regression package in R based on RCourseLab4}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}{inputenc}
 ---
 
