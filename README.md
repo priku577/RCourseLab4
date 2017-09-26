@@ -1,6 +1,6 @@
 # RCourseLab4
 Lab 4 Assignments
-R assignments for course lab3
+R assignments for course lab4
 
 ---Group 5---
 
